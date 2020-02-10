@@ -51,10 +51,6 @@ ptf_tensor(y,'y')
 x=x.to(DEVICE)
 y=y.to(DEVICE)
 
-pred=fc(x)
-print(pred.type())
-ptf_tensor(pred)
-loss=criterion(pred[train_start:train_end],y[train_start:train_end])
 n_steps=20001
 
 for step in range(n_steps):
@@ -67,8 +63,7 @@ for step in range(n_steps):
     loss=criterion(pred[train_start:train_end],y[train_start:train_end])
 
     if step % 500==0:
-        #print('#{}, 损失 = {:g}'.format(step, loss))
-        
+        #print('#{}, 损失 = {:g}'.format(step, loss))        
         output = (pred > 0)
         correct = (output == y.bool())
         n_correct_train = correct[train_start:train_end].sum().item()
